@@ -1,0 +1,19 @@
+name: python pipeline
+
+on: [ push ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - run: pythong hello.py
+  build:
+    needs: [ test ]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/upload-artifact@v3
+      with:
+        name: hello
+        path: .
